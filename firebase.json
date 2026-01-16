@@ -1,0 +1,8 @@
+{
+  "apphosting": {
+    "source": {
+      "projectId": "your-firebase-project-id",
+      "location": "us-central1"
+    }
+  }
+}
