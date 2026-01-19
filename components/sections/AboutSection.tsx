@@ -4,8 +4,38 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import AnimatedSection from '@/components/AnimatedSection'
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
 
 export default function AboutSection() {
+  const [currentTheme, setCurrentTheme] = useState('dark')
+
+  useEffect(() => {
+    // Check initial theme
+    const checkTheme = () => {
+      const htmlElement = document.documentElement
+      if (htmlElement.classList.contains('theme-light')) {
+        setCurrentTheme('light')
+      } else {
+        setCurrentTheme('dark')
+      }
+    }
+
+    // Check theme on mount
+    checkTheme()
+
+    // Watch for theme changes
+    const observer = new MutationObserver(() => {
+      checkTheme()
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   const stats = [
     { label: 'Years in Tech', value: '5+' },
     { label: 'BEng Tech Graduate', value: '2024' },
@@ -61,11 +91,11 @@ export default function AboutSection() {
             <div className="relative">
               <div className="w-80 h-80 mx-auto rounded-full overflow-hidden border-4 border-primary/20">
                 <Image
-                  src="/sakhile.png"
-                  alt="Sakhile Siyabonga Ntombela"
+                  src={currentTheme === 'light' ? '/graduate.png' : '/sakhile.png'}
+                  alt={currentTheme === 'light' ? 'Sakhile Siyabonga Ntombela - Graduate' : 'Sakhile Siyabonga Ntombela'}
                   width={320}
                   height={320}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-opacity duration-300"
                 />
               </div>
             </div>

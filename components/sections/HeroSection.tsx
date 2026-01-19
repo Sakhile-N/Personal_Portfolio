@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Download } from 'lucide-react'
+import { Download, ChevronDown, Code, Database, Cloud } from 'lucide-react'
 import AnimatedSection from '@/components/AnimatedSection'
 
 export default function HeroSection() {
@@ -16,169 +16,188 @@ export default function HeroSection() {
 
   return (
     <AnimatedSection id="home" className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Animated geometric shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute border border-primary/20 rounded-full"
-            style={{
-              width: `${100 + i * 50}px`,
-              height: `${100 + i * 50}px`,
-              left: `${10 + i * 15}%`,
-              top: `${20 + (i % 3) * 30}%`,
-            }}
-            animate={{
-              rotate: [0, 360],
-              scale: [1, 1.1, 1],
-              opacity: [0.1, 0.3, 0.1],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.1) 0%, transparent 50%)`
+        }} />
       </div>
 
-      {/* Main content */}
-      <div className="text-center max-w-4xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+        {/* Left side - Text content */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-8"
+          className="space-y-8"
         >
-          {/* Name with neon blue effect */}
-          <div className="text-6xl md:text-8xl font-bold mb-4 relative">
-            <motion.span 
-              className="neon-blue relative inline-block"
-              animate={{
-                textShadow: [
-                  '0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 60px #3b82f6',
-                  '0 0 10px #3b82f6, 0 0 20px #3b82f6, 0 0 30px #3b82f6',
-                  '0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 60px #3b82f6',
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              Sakhile Ntombela
-              {/* Glitch effect overlay */}
-              <motion.span
-                className="absolute inset-0 text-cyan-400"
-                animate={{
-                  x: [0, 2, -2, 0],
-                  opacity: [0, 0.7, 0],
-                }}
-                transition={{
-                  duration: 0.2,
-                  repeat: Infinity,
-                  repeatDelay: 3,
-                }}
-              >
-                Sakhile Ntombela
-              </motion.span>
-            </motion.span>
-          </div>
-          
-          {/* Enhanced role title with typing effect */}
+          {/* Greeting */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-2xl md:text-3xl text-muted-foreground mb-6 relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <motion.div
-              className="inline-block border-r-2 border-primary"
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              Aspiring NetworK and ML Engineer
-            </motion.div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <span className="text-foreground">Hi, there!</span>
+              <br />
+              <span className="text-foreground">I am</span>
+              <br />
+              <span className="neon-blue">Sakhile Ntombela</span>
+            </h1>
           </motion.div>
-          
-          {/* Enhanced description with gradient text */}
+
+          {/* Description */}
           <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed"
+          >
+            Aspiring Network & ML Engineer from South Africa who is passionate about 
+            IT infrastructure, cloud systems, and AI automation while pursuing my honours degree.
+          </motion.p>
+
+          {/* Connect button */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto mb-8 bg-gradient-to-r from-slate-300 via-blue-200 to-slate-300 bg-clip-text text-transparent leading-relaxed"
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="pt-4"
           >
-            I'm passionate about IT infrastructure, cloud systems, and AI automation. Currently working at CAPACITI while pursuing my honours degree, I enjoy solving technical challenges and exploring new technologies.
-          </motion.p>
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center">
+                <span className="text-sm font-medium">Let's</span>
+              </div>
+              <span className="text-lg font-medium">Connect</span>
+            </button>
+          </motion.div>
         </motion.div>
 
-        {/* Enhanced buttons with holographic effects */}
+        {/* Right side - Illustration */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative flex justify-center lg:justify-end"
         >
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
-              onClick={scrollToProjects}
-              size="lg" 
-              className="text-lg px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/25 border border-blue-400/30 relative overflow-hidden group"
-            >
-              <span className="relative z-10">View My Work</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            </Button>
-          </motion.div>
-          
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8 py-3 border-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary hover:shadow-lg hover:shadow-primary/25 relative overflow-hidden group"
-              asChild
-            >
-              <a href="/Sakhile_Ntombela_Resume.pdf" download>
-                <Download className="mr-2 h-5 w-5 relative z-10" />
-                <span className="relative z-10">Download CV</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              </a>
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Floating tech icons */}
-        <div className="absolute inset-0 pointer-events-none">
-          {['⚡', '🤖', '💻', '🚀', '⚙️', '🔬'].map((icon, i) => (
+          {/* Main illustration container */}
+          <div className="relative w-full max-w-md">
+            {/* Floating elements */}
             <motion.div
-              key={i}
-              className="absolute text-2xl opacity-20"
-              style={{
-                left: `${15 + i * 15}%`,
-                top: `${30 + (i % 2) * 40}%`,
-              }}
-              animate={{
-                y: [-20, 20, -20],
-                rotate: [0, 360],
-                opacity: [0.1, 0.3, 0.1],
-              }}
-              transition={{
-                duration: 4 + i,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-8 -left-8 bg-primary/20 backdrop-blur-sm rounded-lg p-3 border border-primary/30"
             >
-              {icon}
+              <Code className="w-6 h-6 text-primary" />
+              <div className="text-xs text-primary mt-1">HTML</div>
             </motion.div>
-          ))}
-        </div>
+
+            <motion.div
+              animate={{ y: [10, -10, 10] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute -top-4 -right-12 bg-primary/20 backdrop-blur-sm rounded-lg p-3 border border-primary/30"
+            >
+              <Database className="w-6 h-6 text-primary" />
+              <div className="text-xs text-primary mt-1">ML</div>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [-5, 15, -5] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute bottom-8 -left-12 bg-primary/20 backdrop-blur-sm rounded-lg p-3 border border-primary/30"
+            >
+              <Cloud className="w-6 h-6 text-primary" />
+              <div className="text-xs text-primary mt-1">Cloud</div>
+            </motion.div>
+
+            {/* Central developer figure */}
+            <div className="relative bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 border border-primary/20 backdrop-blur-sm">
+              {/* Desk */}
+              <div className="relative">
+                {/* Monitor */}
+                <div className="bg-slate-800 rounded-lg p-4 mb-4 border-2 border-primary/30">
+                  <div className="bg-primary/20 rounded p-2 text-xs font-mono text-primary">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="text-primary">{'<div className="portfolio">'}</div>
+                      <div className="text-primary ml-4">{'<h1>Sakhile Ntombela</h1>'}</div>
+                      <div className="text-primary ml-4">{'<p>Network & ML Engineer</p>'}</div>
+                      <div className="text-primary">{'</div>'}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Keyboard */}
+                <div className="bg-slate-700 rounded p-2 mb-4">
+                  <div className="grid grid-cols-12 gap-1">
+                    {Array.from({ length: 36 }).map((_, i) => (
+                      <div key={i} className="bg-slate-600 rounded-sm h-2"></div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Person silhouette */}
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                  <div className="w-16 h-20 bg-gradient-to-b from-primary/40 to-primary/20 rounded-t-full relative">
+                    {/* Head */}
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-primary/30 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-primary/40 rounded-full"
+                    style={{
+                      left: `${20 + i * 10}%`,
+                      top: `${30 + (i % 3) * 20}%`,
+                    }}
+                    animate={{
+                      y: [-10, 10, -10],
+                      opacity: [0.2, 0.8, 0.2],
+                    }}
+                    transition={{
+                      duration: 3 + i * 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.2,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center text-muted-foreground/60 cursor-pointer"
+          onClick={scrollToProjects}
+        >
+          <span className="text-sm mb-2">Scroll to explore</span>
+          <ChevronDown className="h-6 w-6" />
+        </motion.div>
+      </motion.div>
     </AnimatedSection>
   )
 }

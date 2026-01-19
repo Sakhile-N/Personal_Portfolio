@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Menu, X } from 'lucide-react'
+import ThemeToggle from './ThemeToggle'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -72,8 +73,9 @@ export default function TopNavigation() {
               </button>
             ))}
             
-            {/* Social Links */}
+            {/* Social Links & Theme Toggle */}
             <div className="flex items-center space-x-4 ml-6 pl-6 border-l border-border">
+              <ThemeToggle />
               <a
                 href="https://github.com/SakhileNtombela"
                 target="_blank"
@@ -121,8 +123,9 @@ export default function TopNavigation() {
                 </button>
               ))}
               
-              {/* Mobile Social Links */}
+              {/* Mobile Social Links & Theme Toggle */}
               <div className="flex items-center space-x-4 px-3 py-2 border-t border-border mt-2">
+                <ThemeToggle />
                 <a
                   href="https://github.com/SakhileNtombela"
                   target="_blank"

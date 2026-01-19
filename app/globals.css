@@ -25,6 +25,52 @@
     --ring: 224.3 76.3% 94.0%;
     --radius: 0.5rem;
   }
+
+  /* Light Theme */
+  .theme-light {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+  }
+
+  /* Dark Theme (default) */
+  .theme-dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.0%;
+  }
 }
 
 @layer base {
@@ -45,35 +91,46 @@ html {
 }
 
 .neon-blue {
-  color: #60a5fa;
+  color: hsl(var(--primary));
   text-shadow: 
-    0 0 5px #3b82f6,
-    0 0 10px #3b82f6,
-    0 0 15px #3b82f6,
-    0 0 20px #3b82f6,
-    0 0 35px #3b82f6,
-    0 0 40px #3b82f6;
+    0 0 5px hsl(var(--primary)),
+    0 0 10px hsl(var(--primary)),
+    0 0 15px hsl(var(--primary)),
+    0 0 20px hsl(var(--primary)),
+    0 0 35px hsl(var(--primary)),
+    0 0 40px hsl(var(--primary));
   animation: neon-flicker 2s ease-in-out infinite alternate;
+}
+
+/* Light theme neon effect - more subtle grey glow */
+.theme-light .neon-blue {
+  color: hsl(215 25% 27%); /* Dark grey */
+  text-shadow: 
+    0 0 5px hsl(215 25% 27% / 0.3),
+    0 0 10px hsl(215 25% 27% / 0.2),
+    0 0 15px hsl(215 25% 27% / 0.1),
+    0 0 20px hsl(215 25% 27% / 0.1);
+  animation: none; /* Disable flicker in light mode */
 }
 
 @keyframes neon-flicker {
   0%, 100% {
     text-shadow: 
-      0 0 5px #3b82f6,
-      0 0 10px #3b82f6,
-      0 0 15px #3b82f6,
-      0 0 20px #3b82f6,
-      0 0 35px #3b82f6,
-      0 0 40px #3b82f6;
+      0 0 5px hsl(var(--primary)),
+      0 0 10px hsl(var(--primary)),
+      0 0 15px hsl(var(--primary)),
+      0 0 20px hsl(var(--primary)),
+      0 0 35px hsl(var(--primary)),
+      0 0 40px hsl(var(--primary));
   }
   50% {
     text-shadow: 
-      0 0 2px #3b82f6,
-      0 0 5px #3b82f6,
-      0 0 8px #3b82f6,
-      0 0 12px #3b82f6,
-      0 0 25px #3b82f6,
-      0 0 30px #3b82f6;
+      0 0 2px hsl(var(--primary)),
+      0 0 5px hsl(var(--primary)),
+      0 0 8px hsl(var(--primary)),
+      0 0 12px hsl(var(--primary)),
+      0 0 25px hsl(var(--primary)),
+      0 0 30px hsl(var(--primary));
   }
 }
 
@@ -143,14 +200,48 @@ html {
   z-index: -9999 !important;
 }
 
-/* Hide any red notification boxes */
-div[style*="background-color: rgb(239, 68, 68)"],
-div[style*="background-color: #ef4444"],
-div[style*="background: rgb(239, 68, 68)"],
-div[style*="background: #ef4444"],
-div[style*="background-color: red"],
-div[style*="background: red"] {
+/* Theme-based visibility classes */
+html.theme-dark .theme-light\:block,
+body.theme-dark .theme-light\:block,
+.theme-dark .theme-light\:block {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+}
+
+html.theme-dark .theme-dark\:block,
+body.theme-dark .theme-dark\:block,
+.theme-dark .theme-dark\:block {
+  display: block !important;
+}
+
+html.theme-light .theme-dark\:block,
+body.theme-light .theme-dark\:block,
+.theme-light .theme-dark\:block {
+  display: none !important;
+}
+
+html.theme-light .theme-light\:block,
+body.theme-light .theme-light\:block,
+.theme-light .theme-light\:block {
+  display: block !important;
+}
+
+html.theme-dark .theme-light\:hidden,
+body.theme-dark .theme-light\:hidden,
+.theme-dark .theme-light\:hidden {
+  display: none !important;
+}
+
+html.theme-light .theme-dark\:hidden,
+body.theme-light .theme-dark\:hidden,
+.theme-light .theme-dark\:hidden {
+  display: none !important;
+}
+
+/* Default fallback - show dark mode image by default */
+.theme-dark\:block {
+  display: block;
+}
+
+.theme-light\:block {
+  display: none;
 }
